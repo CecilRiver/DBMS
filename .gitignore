@@ -1,0 +1,39 @@
+# Qt Creator / qmake
+*.pro.user
+*.pro.user.*
+.qmake.stash
+Makefile
+Makefile.*
+build-*/
+debug/
+release/
+
+# 编译产物
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.pdb
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.moc
+
+# 运行时数据（数据库、表空间、索引）
+database.txt
+column.txt
+record.txt
+value.txt
+BUdatabase.txt
+
+# IDE / 系统
+.vscode/
+.idea/
+*.autosave
+.DS_Store
+Thumbs.db
