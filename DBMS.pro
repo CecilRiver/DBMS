@@ -16,29 +16,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    SQLanalysis.cpp \
-    btree.cpp \
-    convert.cpp \
-    database.cpp \
-    login.cpp \
-    main.cpp \
-    table.cpp \
-    user.cpp \
-    widget.cpp
+    src/SQLanalysis.cpp \
+    src/btree.cpp \
+    src/convert.cpp \
+    src/database.cpp \
+    src/login.cpp \
+    src/main.cpp \
+    src/table.cpp \
+    src/user.cpp \
+    src/widget.cpp
 
 HEADERS += \
-    SQLanalysis.h \
-    btree.h \
-    convert.h \
-    database.h \
-    login.h \
-    table.h \
-    user.h \
-    widget.h
+    src/SQLanalysis.h \
+    src/btree.h \
+    src/convert.h \
+    src/database.h \
+    src/login.h \
+    src/table.h \
+    src/user.h \
+    src/widget.h
 
 FORMS += \
-    login.ui \
-    widget.ui
+    src/login.ui \
+    src/widget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

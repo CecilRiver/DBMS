@@ -20,16 +20,16 @@
 ## 目录结构
 
 ```
-main.cpp         程序入口
-login.*          登录 / 注册界面
-widget.*         SQL 控制台
-SQLanalysis.*    SQL 语句解析
-database.*       数据库实体管理
-table.*          表、字段、索引管理
-btree.*          B-Tree 索引与文件读写
-user.*           用户注册、登录、密码加解密
-convert.*        类型转换工具
-user.txt         默认账号数据
+src/main.cpp         程序入口
+src/login.*          登录 / 注册界面
+src/widget.*         SQL 控制台
+src/SQLanalysis.*    SQL 语句解析
+src/database.*       数据库实体管理
+src/table.*          表、字段、索引管理
+src/btree.*          B-Tree 索引与文件读写
+src/user.*           用户注册、登录、密码加解密
+src/convert.*        类型转换工具
+user.txt             默认账号数据
 ```
 
 ## 构建运行
