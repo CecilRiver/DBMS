@@ -10,7 +10,6 @@
 #include<iostream>
 #include<vector>
 #include <QDir>
-/*数据库管理模块*/
 
 using namespace std;
 //在屏幕上打印当前用户的所有数据库名
@@ -27,5 +26,7 @@ bool useDBEntity(QString user,QString DBname);
 bool initDBEntity(QString user,QString DBname);
 //备份数据库
 bool backupDBEntity(QString user);
+//删除文件或文件夹
+bool DeleteFileOrFolder(QString &strPath);
 
 #endif // DATABASE_H

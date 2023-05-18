@@ -39,7 +39,7 @@ void login::on_pushButton_2_clicked()
     }
     else
     {
-        QMessageBox::warning (this,tr("登录失败"),tr("账号或者密码错误"),QMessageBox::Ok);
+        QMessageBox::warning (this,tr("fail to log in"),tr("error"),QMessageBox::Ok);
         ui->Qusername->clear();
         ui->Qpassword->clear();
     }

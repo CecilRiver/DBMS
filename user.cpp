@@ -52,11 +52,12 @@ bool JudgeUser(User user)
     QString u,p;
     //指定文件
 
-    QFile inputFile1(QDir::currentPath()+"/user.txt");
+    //QFile inputFile1(QDir::currentPath()+"/user.txt");
+    QFile inputFile1("D:/download/DBMS1.0/DBMS/user.txt");
     //只读打开
     if(!inputFile1.open(QIODevice::ReadOnly|QIODevice::Text))
     {
-        cout << "打开用户文件失败！"<<endl;
+        cout << "fail to open user file!"<<endl;
         return false;
     }
 
@@ -125,7 +126,8 @@ int regUser(User user)
      int usernum = 0;
      //指定文件
 
-     QFile f1(QDir::currentPath()+"/user.txt");
+     //QFile f1(QDir::currentPath()+"/user.txt");
+     QFile f1("D:/download/DBMS1.0/DBMS/user.txt");
 
         if(!f1.open(QIODevice::ReadOnly|QIODevice::Text))
         {
@@ -172,7 +174,7 @@ int regUser(User user)
                    //创建用户的表空间文件
                    QDir *temp = new QDir;
 
-                   QString folder = QDir::currentPath()+"/";
+                   QString folder = "D:/download/DBMS1.0/DBMS/";
                    folder += user.username;
                    bool exist = temp->exists(folder);
                    if(!exist)

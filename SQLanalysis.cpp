@@ -1,4 +1,5 @@
 #include"SQLanalysis.h"
+#include<QDebug>
 
 
 int sqlAnalysis(QString sql,vector<QString> &sqlkey)
@@ -60,6 +61,17 @@ int sqlAnalysisTable(QString sql,vector<QString> &sqlkey,QString DBname)
     regVector.push_back(QString("create\\s+table\\s+(\\w+)\\s*\\((.*)\\)\\s*;"));
     //匹配向表中插入数据的正则：1
     regVector.push_back(QString("insert\\s+into\\s+([^\\s]+)\\s*\\(([^\\)]+)\\)\\s*values\\s*\\(([^\\)]+)\\)\\s*;"));
+    //匹配删除表的正则：2
+    regVector.push_back(QString("drop(?:\\s*)table(?:\\s*)(\\b[a-z0-9_]+\\b)(?:\\s*);"));
+    //匹配添加字段的正则：3
+    regVector.push_back(QString("alter\\s+table\\s+([^\\s]+)\\s+add\\s+column\\s+([^\\s]+)\\s+([^\\s]+)\\s*;"));
+    //匹配修改字段的正则：4
+    regVector.push_back(QString("alter\\s+table\\s+([^\\s]+)\\s+modify\\s+column\\s+([^\\s]+)\\s+([^\\s]+)\\s*;"));
+    //匹配删除字段的正则：5
+    regVector.push_back(QString("alter\\s+table\\s+([^\\s]+)\\s+drop\\s+column\\s+([^\\s]+)\\s+([^\\s]+)\\s*;"));
+    //匹配创建索引的正则：6
+    regVector.push_back(QString("create\\s+index\\s+(\\w+)\\s+on\\s+(\\w+)\\s*\\(([^\\)]+)\\)\\s*;"));
+
 
     //开始解析sql语句
 
@@ -110,6 +122,118 @@ int sqlAnalysisTable(QString sql,vector<QString> &sqlkey,QString DBname)
           return 1;
         }
 
+
+
+
+
+        //是否符合添加字段的语法
+
+       QRegularExpression re3(regVector[3],QRegularExpression::CaseInsensitiveOption);
+
+        QRegularExpressionMatch match3 = re3.match(sql);
+
+        if (match3.hasMatch()) {
+            QString tableName = match3.captured(1);
+            QString column = match3.captured(2);
+
+            QString field = match3.captured(3);
+
+             //存储表名
+            sqlkey.push_back(tableName);
+            //存储列数量
+            sqlkey.push_back(column);
+
+            sqlkey.push_back(field);
+
+          return 3;
+        }
+
+        //是否符合修改字段的语法
+
+       QRegularExpression re4(regVector[4],QRegularExpression::CaseInsensitiveOption);
+
+        QRegularExpressionMatch match4 = re4.match(sql);
+
+        if (match4.hasMatch()) {
+            QString tableName = match4.captured(1);
+            QString column = match4.captured(2);
+
+            QString field = match4.captured(3);
+
+             //存储表名
+            sqlkey.push_back(tableName);
+            //存储列数量
+            sqlkey.push_back(column);
+
+            sqlkey.push_back(field);
+
+          return 4;
+        }
+
+        //是否符合删除字段的语法
+
+       QRegularExpression re5(regVector[5],QRegularExpression::CaseInsensitiveOption);
+
+        QRegularExpressionMatch match5 = re5.match(sql);
+
+        if (match5.hasMatch()) {
+            QString tableName = match5.captured(1);
+            QString column = match5.captured(2);
+
+            QString field = match5.captured(3);
+
+             //存储表名
+            sqlkey.push_back(tableName);
+            //存储列数量
+            sqlkey.push_back(column);
+
+            sqlkey.push_back(field);
+
+          return 5;
+        }
+
+        //是否符合创建索引的语法
+        QRegularExpression re6(regVector[6],QRegularExpression::CaseInsensitiveOption);
+
+         QRegularExpressionMatch match6 = re6.match(sql);
+         if (match6.hasMatch()) {
+             // 获取索引名
+             QString indexName = match6.captured(1);
+             //获取表名
+             QString tableName = match6.captured(2);
+             // 获取列名
+             QString columns = match6.captured(3);
+
+             // 存取索引名称
+             sqlkey.push_back(indexName);
+             //存储表名
+             sqlkey.push_back(tableName);
+             //存储列数量
+             sqlkey.push_back(columns);
+
+           return 6;
+         }
+
+
+
+        for (unsigned int i = 0; i < regVector.size(); i++)
+        {
+            QRegExp reg(regVector[i],Qt::CaseInsensitive);
+            //传入的sql语句和每个正则表达式进行匹配
+            //匹配的第一个字符的位置，从0开始，若为-1则不匹配
+            int pos = reg.indexIn(sql);
+            //若匹配
+            if (pos >= 0)
+            {
+                for (int j = 0; j < 1; j++)
+                {
+                    //将对应的值放入sqlkey
+                    sqlkey.push_back(reg.cap(j + 1));
+                }
+                //返回数据库操作对应的编号，从0开始
+                return 2;
+            }
+        }
 
     return -1;
 

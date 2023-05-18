@@ -161,6 +161,48 @@ void Widget::on_Execute_clicked()
 
            break;
 
+        case 2:
+            if(dropTable(curuser,DBname,sqlkey)){
+                ui->textBrowser->setText("drop table successfully!");
+            }else{
+                ui->textBrowser->setText("Failed to drop table!");
+            }
+
+            break;
+
+        case 3:
+            if(addField(curuser,DBname,sqlkey)){
+                ui->textBrowser->setText("add field successfully!");
+            }else{
+                ui->textBrowser->setText("Failed to add field!");
+            }
+
+            break;
+        case 4:
+            if(modifyField(curuser,DBname,sqlkey)){
+                ui->textBrowser->setText("modify field successfully!");
+            }else{
+                ui->textBrowser->setText("Failed to modify field!");
+            }
+
+            break;
+
+        case 5:
+            if(dropField(curuser,DBname,sqlkey)){
+                ui->textBrowser->setText("drop field successfully!");
+            }else{
+                ui->textBrowser->setText("Failed to drop field!");
+            }
+
+            break;
+         case 6:
+            if(createIndex(curuser,DBname,sqlkey)){
+                ui->textBrowser->setText("create index successfully!");
+            }else{
+                ui->textBrowser->setText("Failed to create index!");
+            }
+            break;
+
         case -1:
              ui->textBrowser->setText("syntax error!");
             break;
