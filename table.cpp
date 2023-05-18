@@ -28,7 +28,7 @@ column judgeColumn(QString user,QString DBname,QString tableName,QString attribu
 {
     column col;
     //打开文件
-     QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+tableName+"/column.txt";
+     QString folder = QDir::currentPath()+"/"+user+"/"+DBname+"/"+tableName+"/column.txt";
       QFile file(folder);
      if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
      {
@@ -68,7 +68,7 @@ column judgeColumn(QString user,QString DBname,QString tableName,QString attribu
 
 int judgeNumber(QString user,QString DBname,QString tableName)
 {
-    QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+tableName+"/column.txt";
+    QString folder = QDir::currentPath()+"/"+user+"/"+DBname+"/"+tableName+"/column.txt";
      QFile file(folder);
      if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
      {
@@ -94,7 +94,7 @@ bool createTable(QString user,QString DBname,vector<QString> sqlkey)
 {
     //在对应的数据库文件夹下创建表文件夹
     sqlkey.at(0) = sqlkey.at(0).toUpper();
-    QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(0);
+    QString folder = QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(0);
     QDir *temp = new QDir;
     bool exist = temp->exists(folder);
     if(!exist)
@@ -129,7 +129,7 @@ bool createTable(QString user,QString DBname,vector<QString> sqlkey)
 
     }
     //database.txt中对应数据库里的表数量加一
-    folder = "D:/download/DBMS1.0/DBMS/"+user+"/database.txt";
+    folder = QDir::currentPath()+"/"+user+"/database.txt";
     QFile file1(folder);
     QStringList list;
 
@@ -175,7 +175,7 @@ bool createTable(QString user,QString DBname,vector<QString> sqlkey)
 
 
      //创建记录文件，第一行写上当前记录数：0
-     QString folder_temp = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/record.txt";
+     QString folder_temp = QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/record.txt";
      QFile file_temp(folder_temp);
      if(!file_temp.open(QIODevice::WriteOnly|QIODevice::Text))
      {
@@ -199,7 +199,7 @@ bool insertIntoTable(QString user,QString DBname,vector<QString> sqlkey)
 {
     sqlkey.at(0) = sqlkey.at(0).toUpper();
     //打开记录文件
-    QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/record.txt";
+    QString folder = QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/record.txt";
     QFile file(folder);
 
     if(!file.open(QIODevice::ReadWrite | QIODevice::Text))
@@ -281,11 +281,11 @@ bool insertIntoTable(QString user,QString DBname,vector<QString> sqlkey)
 bool dropTable(QString user,QString DBname,vector<QString> sqlkey){
     //删除表的文件夹
     sqlkey.at(0) = sqlkey.at(0).toUpper();
-    QString folderTable = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(0);
+    QString folderTable = QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(0);
     DeleteFileOrFolder(folderTable);
 
     //database.txt中对应数据库里的表数量减一
-    QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/database.txt";
+    QString folder = QDir::currentPath()+"/"+user+"/database.txt";
     QFile file1(folder);
     QStringList list;
 
@@ -336,7 +336,7 @@ bool dropTable(QString user,QString DBname,vector<QString> sqlkey){
 bool addField(QString user,QString DBname,vector<QString> sqlkey){
 
     sqlkey.at(0) = sqlkey.at(0).toUpper();
-    QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/column.txt";
+    QString folder = QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/column.txt";
     QFile file(folder);
     if(!file.open(QIODevice::ReadWrite | QIODevice::Append))
     {
@@ -358,7 +358,7 @@ bool modifyField(QString user,QString DBname,vector<QString> sqlkey){
     QString strAll;
     QStringList strList;
     sqlkey.at(0) = sqlkey.at(0).toUpper();
-    QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/column.txt";
+    QString folder = QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/column.txt";
     QFile file(folder);
     if(file.open((QIODevice::ReadOnly|QIODevice::Text)))
     {
@@ -410,7 +410,7 @@ bool dropField(QString user,QString DBname,vector<QString> sqlkey){
     QString strAll;
     QStringList strList;
     sqlkey.at(0) = sqlkey.at(0).toUpper();
-    QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/column.txt";
+    QString folder = QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(0)+"/column.txt";
     QFile file(folder);
     if(file.open((QIODevice::ReadOnly|QIODevice::Text)))
     {
@@ -459,7 +459,7 @@ bool createIndex(QString user,QString DBname,vector<QString> sqlkey)
         column col = judgeColumn(user, DBname,sqlkey.at(1),sqlkey.at(2));
         int number = col.attributeLocation;
         //打开文件，获取相应数据，构建B树
-        QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(1)+"/record.txt";
+        QString folder = QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(1)+"/record.txt";
         QFile file(folder);
         if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
         {
@@ -487,8 +487,8 @@ bool createIndex(QString user,QString DBname,vector<QString> sqlkey)
                keyValuePairs.insert(temp[number],lineLocation);
               }
               //写入文件
-              bTree.writeToFile("D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(1)+"/"+sqlkey.at(0)+".txt");
-              bTree.writeValue("D:/download/DBMS1.0/DBMS/"+user+"/"+DBname+"/"+sqlkey.at(1)+"/"+sqlkey.at(0)+"value.txt",keyValuePairs);
+              bTree.writeToFile(QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(1)+"/"+sqlkey.at(0)+".txt");
+              bTree.writeValue(QDir::currentPath()+"/"+user+"/"+DBname+"/"+sqlkey.at(1)+"/"+sqlkey.at(0)+"value.txt",keyValuePairs);
 
         }
         return true;

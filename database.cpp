@@ -4,7 +4,7 @@
 //展示数据库
 bool showdatabases(QString user,QString& databases)
 {
-    //QString folder = "D:/download/DBMS1.0/DBMS/"+user+"/database.txt";
+    //QString folder = QDir::currentPath()+"/"+user+"/database.txt";
     QString folder = QDir::currentPath()+"/"+user+"/database.txt";
     //打开文件
     QFile file(folder);
@@ -39,7 +39,7 @@ bool createDBEntity(QString user,QString DBname)
     QStringList list;
     vector<QString> lines;
     //QString folder = QDir::currentPath()+"/";
-    QString folder = "D:/download/DBMS1.0/DBMS/";
+    QString folder = QDir::currentPath()+"/";
     folder += user;
     folder += "/database.txt";
     int databaseNum = 0;
@@ -97,7 +97,7 @@ bool renameDBEntity(QString user,QString oldName,QString newName)
 {
 
     vector<QString> lines;
-    QString folder = "D:/download/DBMS1.0/DBMS/";
+    QString folder = QDir::currentPath()+"/";
     folder += user;
     folder += "/database.txt";
     int databaseNum = 0;
@@ -155,7 +155,7 @@ bool renameDBEntity(QString user,QString oldName,QString newName)
 bool dropDBEntity(QString user,QString DBname)
 {
     vector<QString> lines;
-    QString folder = "D:/download/DBMS1.0/DBMS/";
+    QString folder = QDir::currentPath()+"/";
     folder += user;
     folder += "/database.txt";
     int databaseNum = 0;
@@ -210,7 +210,7 @@ bool dropDBEntity(QString user,QString DBname)
         }
 
         //删除文件夹
-        QString folder1 = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname;
+        QString folder1 = QDir::currentPath()+"/"+user+"/"+DBname;
         DeleteFileOrFolder(folder1);
 
         return true;
@@ -222,7 +222,7 @@ bool useDBEntity(QString user,QString DBname)
     //首先查看该数据库是否已经建立
     QStringList list;
 
-    QString folder = "D:/download/DBMS1.0/DBMS/";
+    QString folder = QDir::currentPath()+"/";
     folder += user;
     folder += "/database.txt";
     int databaseNum = 0;
@@ -258,7 +258,7 @@ bool useDBEntity(QString user,QString DBname)
             return false;
         }
        //再查看该数据库是否已经初始化
-        folder ="D:/download/DBMS1.0/DBMS/"+user+"/"+DBname;
+        folder =QDir::currentPath()+"/"+user+"/"+DBname;
         QDir *temp = new QDir;
         bool exist = temp->exists(folder);
         if(!exist)
@@ -277,7 +277,7 @@ bool initDBEntity(QString user,QString DBname)
     //首先查找该数据库是否已经创建
     QStringList list;
 
-    QString folder = "D:/download/DBMS1.0/DBMS/";
+    QString folder = QDir::currentPath()+"/";
     folder += user;
     folder += "/database.txt";
     int databaseNum = 0;
@@ -313,7 +313,7 @@ bool initDBEntity(QString user,QString DBname)
             return false;
         }
         //创建该数据库文件夹
-        folder = "D:/download/DBMS1.0/DBMS/"+user+"/"+DBname;
+        folder = QDir::currentPath()+"/"+user+"/"+DBname;
         QDir *temp = new QDir;
         bool exist = temp->exists(folder);
         if(!exist)
@@ -333,10 +333,10 @@ bool initDBEntity(QString user,QString DBname)
 bool backupDBEntity(QString user)
 {
     vector<QString> lines;
-    QString folder = "D:/download/DBMS1.0/DBMS/";
+    QString folder = QDir::currentPath()+"/";
     folder += user;
     folder += "/BUdatabase.txt";
-    QString source ="D:/download/DBMS1.0/DBMS/"+user+"/database.txt";
+    QString source =QDir::currentPath()+"/"+user+"/database.txt";
 
     QFile f1(source);
     if(!f1.open(QIODevice::ReadOnly|QIODevice::Text))

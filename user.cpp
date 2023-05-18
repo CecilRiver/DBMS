@@ -53,7 +53,7 @@ bool JudgeUser(User user)
     //指定文件
 
     //QFile inputFile1(QDir::currentPath()+"/user.txt");
-    QFile inputFile1("D:/download/DBMS1.0/DBMS/user.txt");
+    QFile inputFile1(QDir::currentPath()+"/user.txt");
     //只读打开
     if(!inputFile1.open(QIODevice::ReadOnly|QIODevice::Text))
     {
@@ -127,7 +127,7 @@ int regUser(User user)
      //指定文件
 
      //QFile f1(QDir::currentPath()+"/user.txt");
-     QFile f1("D:/download/DBMS1.0/DBMS/user.txt");
+     QFile f1(QDir::currentPath()+"/user.txt");
 
         if(!f1.open(QIODevice::ReadOnly|QIODevice::Text))
         {
@@ -174,7 +174,7 @@ int regUser(User user)
                    //创建用户的表空间文件
                    QDir *temp = new QDir;
 
-                   QString folder = "D:/download/DBMS1.0/DBMS/";
+                   QString folder = QDir::currentPath()+"/";
                    folder += user.username;
                    bool exist = temp->exists(folder);
                    if(!exist)
